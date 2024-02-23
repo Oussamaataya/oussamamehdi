@@ -1,0 +1,210 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Publication{% endblock %}
+
+{% block body %}
+
+
+    <div class="container">
+        <h1 class="text-center">Publication</h1>
+
+        <div class="text-center">
+            <img src="{{ publication.image }}" alt="Publication Image" class="img-fluid" style="max-width: 500px; height: auto;">
+        </div>
+
+        <div class="text-center mt-3">
+            <div>
+                <h2>{{ publication.titre }}</h2>
+                <p>{{ publication.description }}</p>
+            </div>
+        </div>
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publication</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+
+            <style>
+                /* Your CSS styles here */
+                body {
+                    background-color: #f7f6f6;
+                }
+
+                .card {
+                    border: none;
+                    box-shadow: 5px 6px 6px 2px #e9ecef;
+                    border-radius: 4px;
+                }
+
+                .dots {
+                    height: 4px;
+                    width: 4px;
+                    margin-bottom: 2px;
+                    background-color: #bbb;
+                    border-radius: 50%;
+                    display: inline-block;
+                }
+
+                .badge {
+                    padding: 7px;
+                    padding-right: 9px;
+                    padding-left: 16px;
+                    box-shadow: 5px 6px 6px 2px #e9ecef;
+                }
+
+                .user-img {
+                    margin-top: 4px;
+                }
+
+                .check-icon {
+                    font-size: 17px;
+                    color: #c3bfbf;
+                    top: 1px;
+                    position: relative;
+                    margin-left: 3px;
+                }
+
+                .form-check-input {
+                    margin-top: 6px;
+                    margin-left: -24px !important;
+                    cursor: pointer;
+                }
+
+                .form-check-input:focus {
+                    box-shadow: none;
+                }
+
+                .icons i {
+                    margin-left: 8px;
+                }
+
+                .reply {
+                    margin-left: 12px;
+                }
+
+                .reply small {
+                    color: #b7b4b4;
+                }
+
+                .reply small:hover {
+                    color: green;
+                    cursor: pointer;
+                }
+            </style>
+
+            <div class="headings d-flex justify-content-between align-items-center mb-3">
+                <h5>Comments</h5>
+                <div class="buttons">
+                    <span class="badge bg-white d-flex flex-row align-items-center">
+                        <span class="text-primary">Comments</span>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="toggleComments" checked>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <ul class="list-group" id="commentsList">
+                {% for commentaire in publication.commentaires %}
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center">
+                                <span><small class="font-weight-bold text-primary">{{ commentaire.idUser.nom }}</small>: {{ commentaire.contenu }}</span>
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="text-center mt-3">
+                <a href="{{ path('app_publication_back') }}" class="btn btn-primary">Back to List</a>
+                <a href="{{ path('back_publication_edit', {'id': publication.id}) }}" class="btn btn-secondary">Edit</a>
+            </div>
+
+            <div class="container mt-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <h5>Add a Comment</h5>
+                        
+                        {{ form_start(commentForm, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                        <div class="form-group">
+                            {{ form_label(commentForm.contenu, null, {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(commentForm.contenu, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(commentForm.contenu) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(commentForm.contenu) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            {{ form_label(commentForm.id_user, 'Nom de l utilisateur', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(commentForm.id_user, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(commentForm.id_user) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(commentForm.id_user) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group" style="display: none;">
+                            {# Hidden field for id_pub #}
+                            {{ form_label(commentForm.id_pub, 'Publication', {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(commentForm.id_pub, {'attr': {'class': 'form-control'}}) }}
+                            {% if form_errors(commentForm.id_pub) %}
+                                <div class="alert alert-danger">
+                                    {{ form_errors(commentForm.id_pub) }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        
+                        {{ form_end(commentForm) }}
+                        
+
+                    </div>
+                </div>
+            </div>
+
+            {{ include('admin/publication/_delete_form.html.twig') }}
+
+
+            <script>
+                const toggleComments = document.getElementById('toggleComments');
+                const commentsList = document.getElementById('commentsList');
+
+                toggleComments.addEventListener('change', function() {
+                    if (toggleComments.checked) {
+                        commentsList.style.display = 'block';
+                    } else {
+                        commentsList.style.display = 'none';
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+
+
+        
+        
+        
+        
+{% endblock %}
