@@ -38,8 +38,14 @@ class PublicationBackController extends AbstractController
     #[Route('/admin/publication/new', name: 'back_publication_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        
+        $currentUser = $this->getUser();
+
         $publication = new Publication();
+        $publication->setIdUser($currentUser); // Assuming you have a method like setIdUser
+
         $form = $this->createForm(PublicationType::class, $publication);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

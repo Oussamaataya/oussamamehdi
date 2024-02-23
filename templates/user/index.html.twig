@@ -2,7 +2,12 @@
 
 {% block title %}{% endblock %}
 
+
+
+
 {% block body %}
+
+<br><br><br><br>
 	<div class="grix xs4 container">
 		<div class="grix xs4 container">
 		{% for message in app.flashes('message') %}
@@ -12,30 +17,53 @@
 		{% endfor %}
 		<div class="col-xs4">
         
-			<h1>Profil de {{ app.user.nom }} </h1>
+			<h1>Profil de {{ app.user.nom }} </h1><br>
 		</div>
-		<div class="col-xs1">Nom :</div>
-		<div class="col-xs3">{{ app.user.nom }} </div>
-		<div class="col-xs1">Prénom :</div>
-		<div class="col-xs3">{{ app.user.prenom }}</div>
-		<div class="col-xs1">Email :</div>
-		<div class="col-xs3">{{ app.user.email }}</div>
-        <div class="col-xs1">Telephone:  </div>
-		<div class="col-xs3">{{ app.user.tel }}</div>
-        <div class="col-xs1">NumCnam:</div>
-		<div class="col-xs3">{{ app.user.NumCnam }}</div>
-		<div class="col-xs1">Adresse:</div>
-		<div class="col-xs3">{{ app.user.adresse }}</div><br>
-		<div class="col-xs4">
-            <a href="{{ path ('ModifUser' ) }}" class="btn grey">Modifier le profil</a>
+		<div style="display: flex;">
+    <div style="flex-basis: 5%; font-weight: bold; font-size: 1.2em;">Nom:</div>
+    <div style="flex-basis: 30%;">{{ app.user.nom }}</div>
+</div>
+
+<div style="display: flex;">
+    <div style="flex-basis: 5%; font-weight: bold; font-size: 1.2em;">Prénom:</div>
+    <div style="flex-basis: 30%;">{{ app.user.prenom }}</div>
+</div>
+
+<div style="display: flex;">
+    <div style="flex-basis: 5%; font-weight: bold; font-size: 1.2em;">Email:</div>
+    <div style="flex-basis: 30%;">{{ app.user.email }}</div>
+</div>
+
+<div style="display: flex;">
+    <div style="flex-basis: 5%; font-weight: bold; font-size: 1.2em;">Telephone:</div>
+    <div style="flex-basis: 30%;">{{ app.user.tel }}</div>
+</div>
+
+<div style="display: flex;">
+    <div style="flex-basis: 5%; font-weight: bold; font-size: 1.2em;">NumCnam:</div>
+    <div style="flex-basis: 30%;">{{ app.user.NumCnam }}</div>
+</div>
+
+<div style="display: flex;">
+    <div style="flex-basis: 5%; font-weight: bold; font-size: 1.2em;">Adresse:</div>
+    <div style="flex-basis: 30%;">{{ app.user.adresse }}</div>
+</div>
+			<br>
+		</div>
+	
+		 <div>
+            <a href="{{ path ('ModifUser' ) }}" class="btn btn-secondary">Modifier le profil</a><br>
             <br>
-            <a href="{{ path ('ModifPassUser' ) }}" class="btn grey">Modifier le mot de passe</a>
+            <a href="{{ path ('ModifPassUser' ) }}" class="btn btn-secondary">Modifier le mot de passe</a><br>
             <br>
-            <a href="{{ path ('home' ) }}" class="btn grey">retour</a>
+            <a href="{{ path ('home' ) }}" class="btn btn-secondary">retour</a>
+			  
            
         </div>
 
 		
         
 	</div>
+	</div><br><br><br>
+	<br><br><br><br><br><br><br>
 {% endblock %}

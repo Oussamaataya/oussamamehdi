@@ -23,6 +23,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank(message: "L email ne peut pas être vide.")]

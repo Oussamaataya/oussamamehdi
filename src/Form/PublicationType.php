@@ -38,9 +38,12 @@ class PublicationType extends AbstractType
           
             ->add('id_user', EntityType::class, [
                 'class' => Users::class, // Set the class to the User entity
-                'choice_label' => 'email', // Set the property to display in the dropdown
+                'choice_label' => 'email',
+                'label'=> 'User', // Set the property to display in the dropdown
                 'placeholder' => 'Select a user', // Optional: Add a placeholder
                 'required' => true, 
+                'disabled' => 'disabled',
+                
             ]);
     }
 

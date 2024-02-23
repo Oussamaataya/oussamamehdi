@@ -33,10 +33,7 @@
   {% endblock %}
 
 </head>
-
-<body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
-{% block body %}
-
+{% block header %}
 {# ======= Header ======= #}
   <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="container-fluid d-flex align-items-center justify-content-between">
@@ -84,6 +81,12 @@
 
     </div>
   </header>{# End Header #}
+  {% endblock %}
+
+<body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
+{% block body %}
+
+
 
   <main id="main">
 
